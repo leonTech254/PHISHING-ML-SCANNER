@@ -13,21 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragemntLayout"
-
         />
-
-
-
-
 
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/navigationView"
-        app:headerLayout="@layout/header_layout"
-        app:menu="@menu/main_menu"
-        android:fitsSystemWindows="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
-        />
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header_layout"
+        app:menu="@menu/main_menu" />
+
+
+   />
 
 </androidx.drawerlayout.widget.DrawerLayout>

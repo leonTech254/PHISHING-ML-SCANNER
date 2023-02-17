@@ -1,6 +1,7 @@
 package com.leonteqsecurity.phishingdetector;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class EmailListAdaptor extends RecyclerView.Adapter<EmailListAdaptor.Emai
         EmailItems EmailItems=emailitems.get(position);
         holder.emailHeader.setText(EmailItems.getEmailSubject());
         String emailSender=EmailItems.getSender();
-        Toast.makeText(context, emailSender, Toast.LENGTH_SHORT).show();
+
 
         if(EmailItems.getEmailContentReview().length()>=95)
         {
@@ -50,7 +51,15 @@ public class EmailListAdaptor extends RecyclerView.Adapter<EmailListAdaptor.Emai
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "hello world", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, emailSender, Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(context,EmailReadScreen.class);
+                intent.putExtra("sender",emailSender);
+                intent.putExtra("subject",EmailItems.getEmailSubject());
+                intent.putExtra("email",EmailItems.getEmailContentReview());
+                context.startActivity(intent);
+
+
+
             }
         });
 
