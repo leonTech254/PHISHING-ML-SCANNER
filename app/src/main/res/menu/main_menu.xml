@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<group android:checkableBehavior="single">
+    <item android:title="All inbox" android:id="@+id/allInbox" android:icon="@drawable/baseline_move_to_inbox_24"/>
+    <item android:title="Blocked/spam mails" android:id="@+id/blockedmails" android:icon="@drawable/baseline_dangerous_24"/>
+    <item android:title="Blacklisted User mails" android:id="@+id/blacklisted"  android:icon="@drawable/baseline_person_off_24"/>
+    <item android:title="sent" android:id="@+id/sentmail" android:icon="@drawable/baseline_send_24"/>
+</group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Management">
+            <menu>
+                <group>
+                    <item android:title="settings" android:id="@+id/settings" android:icon="@drawable/baseline_settings_24"/>
+                    <item android:title="calendar" android:id="@+id/calendar" android:icon="@drawable/baseline_calendar_month_24"/>
+                    <item android:title="help" android:id="@+id/help" android:icon="@drawable/baseline_help_24"/>
+                    <item android:icon="@drawable/baseline_report_gmailerrorred_24" android:id="@+id/report" android:title="report"/>
+                    <item android:title="log out" android:id="@+id/logout" android:icon="@drawable/baseline_logout_24"/>
+
+                </group>
+
+            </menu>
+        </item>
+
+
+    </group>
+
+
+</menu>
