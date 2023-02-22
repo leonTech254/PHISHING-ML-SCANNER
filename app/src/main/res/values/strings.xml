@@ -4,4 +4,10 @@
     <string name="menu_open">Open</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="emails">
+        <item>martinwambugu444@gmail.com</item>
+
+    </string-array>
 </resources>

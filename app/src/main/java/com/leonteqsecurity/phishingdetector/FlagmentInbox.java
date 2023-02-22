@@ -1,5 +1,6 @@
 package com.leonteqsecurity.phishingdetector;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,10 @@ public class FlagmentInbox extends Fragment {
     private RecyclerView recyclerView;
     private  RecyclerView.Adapter adapter;
     private List<EmailItems> emailitems;
+    private FloatingActionButton btnCompose;
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,6 +34,8 @@ public class FlagmentInbox extends Fragment {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_flagment_inbox, container, false);
         CreateList();
+        composeEmail();
+
 
 
         return  view;
@@ -46,5 +56,29 @@ public class FlagmentInbox extends Fragment {
         }
         adapter=new EmailListAdaptor(emailitems,getContext());
         recyclerView.setAdapter(adapter);
+
+
+
+
+
+
+
     }
+
+public  void composeEmail()
+{
+    FloatingActionButton btn=(FloatingActionButton) view.findViewById(R.id.email_fab);
+    btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent= new Intent(getContext(),ComposeEmail.class);
+            startActivity(intent);
+        }
+    });
+}
+
+
+
+
+
 }

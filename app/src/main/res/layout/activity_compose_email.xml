@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ComposeEmail"
+    android:orientation="vertical"
+    android:background="@color/black"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+
+
+            />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:entries="@array/emails"
+            android:background="@drawable/snipper_design"
+            android:spinnerMode="dropdown"
+            android:dropDownVerticalOffset="40dp"
+            android:dropDownWidth="match_parent"
+            android:popupBackground="@color/white"
+
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+
+            />
+        <EditText
+
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:inputType="text"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        >
+        <EditText
+
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="text"
+            android:hint="Subject"
+
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            />
+
+        <EditText
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="textMultiLine"
+            android:hint="Compose email"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attach a file"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_weight="4"
+                />
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/baseline_attach_email_24"
+                app:tint="@color/white"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="btnAttachFile"
+
+                />
+
+
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/fileAttachedId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No file attached"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="100dp"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send mail"
+            android:drawableRight="@drawable/baseline_send_24"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>
