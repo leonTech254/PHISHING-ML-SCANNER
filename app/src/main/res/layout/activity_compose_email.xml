@@ -25,20 +25,26 @@
             android:textSize="20sp"
 
 
-            />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:entries="@array/emails"
-            android:background="@drawable/snipper_design"
-            android:spinnerMode="dropdown"
-            android:dropDownVerticalOffset="40dp"
-            android:dropDownWidth="match_parent"
-            android:popupBackground="@color/white"
 
             />
+        <TextView
+            android:id="@+id/fromEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="click to choose Enail"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/teal_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="RegisterdAccounts"
+
+
+
+
+            />
+
+
 
 
     </LinearLayout>
@@ -55,13 +61,14 @@
 
             />
         <EditText
-
+            android:id="@+id/toEmail"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:backgroundTint="@color/white"
             android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:inputType="text"
+
 
             />
     </LinearLayout>
@@ -73,7 +80,7 @@
         android:orientation="vertical"
         >
         <EditText
-
+            android:id="@+id/Subject"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:inputType="text"
@@ -85,6 +92,7 @@
             />
 
         <EditText
+            android:id="@+id/emailField"
             android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -144,6 +152,8 @@
             android:layout_height="wrap_content"
             android:text="send mail"
             android:drawableRight="@drawable/baseline_send_24"
+            android:clickable="true"
+            android:onClick="SendMailBtn"
             />
 
 

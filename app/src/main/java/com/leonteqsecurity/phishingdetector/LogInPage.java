@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class LogInPage extends AppCompatActivity {
     DbHelper db;
 
@@ -40,14 +42,26 @@ public class LogInPage extends AppCompatActivity {
         }else
         {
             db=new DbHelper(this);
-            db.getRegisterUser(emailString);
+            List<String> credetials=db.getRegisterUser(emailString);
+            if (credetials == null || credetials.isEmpty()) {
+                Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            } else {
+                String dbPassword = credetials.get(0);
+                if (passwordString.equals(dbPassword)) {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Wrong username/password", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
         }
 
 
 
 
-        Intent intent =new Intent(this,MainActivity.class);
-        startActivity(intent);
+
 
     }
 

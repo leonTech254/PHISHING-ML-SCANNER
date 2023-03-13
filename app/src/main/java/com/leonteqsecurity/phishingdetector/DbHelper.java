@@ -10,9 +10,13 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DbHelper extends SQLiteOpenHelper {
     static String Db_name="AppDatabase.db";
     static int version=1;
+    private List<String> credentials;
     public DbHelper(Context context) {
         super(context, Db_name, null, version);
     }
@@ -20,7 +24,8 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE UserEmails(_id INTEGER PRIMARY KEY AUTOINCREMENT,Username TEXT,email TEXT,password TEXT)");
-        db.execSQL("CREATE TABLE emailsInbox(_id INTEGER PRIMARY KEY AUTOINCREMENT,emailsContent TEXT,sender TEXT,Read TEXT,BlackListed TEXT DEFAULT 'no',TimeStamp TEXT)");
+        db.execSQL("CREATE TABLE emailsInbox(_id INTEGER PRIMARY KEY AUTOINCREMENT,emailsContent TEXT,sender TEXT,Read TEXT,BlackListed TEXT DEFAULT 'no',TimeStamp TEXT,Sent TEXT)");
+
     }
 
     @Override
@@ -33,8 +38,8 @@ public class DbHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase db=this.getReadableDatabase();
         ContentValues contentValues= new ContentValues();
-        contentValues.put("emailsContent",username);
         contentValues.put("email",email);
+        contentValues.put("Username",username);
         contentValues.put("password",password);
        long response=db.insert("UserEmails",null,contentValues);
        if(response==-1)
@@ -49,7 +54,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     }
-    public  boolean putEmails(String content,String sender,String read,String BlackListed,String TimeStamp)
+    public  boolean putEmails(String content,String sender,String read,String BlackListed,String TimeStamp,String Sent)
     {
         SQLiteDatabase db=this.getReadableDatabase();
         ContentValues contentValues= new ContentValues();
@@ -58,6 +63,8 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put("Read",read);
         contentValues.put("BlackListed",BlackListed);
         contentValues.put("TimeStamp",TimeStamp);
+        contentValues.put("Sent",Sent);
+
         long response=db.insert("emailsInbox",null,contentValues);
         if(response==-1)
         {
@@ -72,22 +79,43 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void getRegisterUser(String email) {
-        System.out.println(email);
+    public List<String> getRegisterUser(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM UserEmails WHERE email=?", new String[] { email });
 
+        List<String> credentials = null;
+
         if (cursor.moveToFirst()) {
             // The query returned at least one row, so we can extract the data
-            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("_id"));
-            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("Username"));
-            @SuppressLint("Range") String emailAddress = cursor.getString(cursor.getColumnIndex("email"));
             @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex("password"));
-
-            System.out.println("User Data"+"ID: " + id + ", Name: " + name + ", Email: " + emailAddress+" password "+ password);
+            credentials = new ArrayList<>();
+            credentials.add(password);
+            credentials.add(email);
         }
+
         cursor.close();
+        return credentials;
     }
+    public List<String> getAccountEmails() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT email FROM UserEmails", null);
+        List<String> emails = new ArrayList<>();
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex("email"));
+                emails.add(email);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        System.out.println(emails);
+        return emails;
+    }
+
+
+
 
 
 }
