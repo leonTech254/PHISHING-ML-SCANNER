@@ -4,7 +4,7 @@
 <group android:checkableBehavior="single">
     <item android:title="All inbox" android:id="@+id/allInbox" android:icon="@drawable/baseline_move_to_inbox_24"/>
     <item android:title="Blocked/spam mails" android:id="@+id/blockedmails" android:icon="@drawable/baseline_dangerous_24"/>
-    <item android:title="Blacklisted User mails" android:id="@+id/blacklisted"  android:icon="@drawable/baseline_person_off_24"/>
+    <item android:title="blocked users" android:id="@+id/blacklisted"  android:icon="@drawable/baseline_person_off_24"/>
     <item android:title="sent" android:id="@+id/sentmail" android:icon="@drawable/baseline_send_24"/>
 </group>
 

@@ -24,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE UserEmails(_id INTEGER PRIMARY KEY AUTOINCREMENT,Username TEXT,email TEXT,password TEXT)");
-        db.execSQL("CREATE TABLE emailsInbox(_id INTEGER PRIMARY KEY AUTOINCREMENT,emailsContent TEXT,sender TEXT,Read TEXT,BlackListed TEXT DEFAULT 'no',TimeStamp TEXT,Sent TEXT)");
+        db.execSQL("CREATE TABLE emailsInbox(_id INTEGER PRIMARY KEY AUTOINCREMENT,emailsContent TEXT,Subject TEXT,sender TEXT,Read TEXT,Receiver TEXT,BlackListed TEXT DEFAULT 'no',TimeStamp TEXT,Sent TEXT)");
 
     }
 
@@ -54,7 +54,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     }
-    public  boolean putEmails(String content,String sender,String read,String BlackListed,String TimeStamp,String Sent)
+    public  boolean putEmails(String content,String subject,String sender,String Receiver,String read,String BlackListed,String TimeStamp,String Sent)
     {
         SQLiteDatabase db=this.getReadableDatabase();
         ContentValues contentValues= new ContentValues();
@@ -63,7 +63,9 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put("Read",read);
         contentValues.put("BlackListed",BlackListed);
         contentValues.put("TimeStamp",TimeStamp);
+        contentValues.put("Subject",subject);
         contentValues.put("Sent",Sent);
+        contentValues.put("Receiver",Receiver);
 
         long response=db.insert("emailsInbox",null,contentValues);
         if(response==-1)
@@ -105,6 +107,28 @@ public class DbHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex("email"));
+                emails.add(email);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        System.out.println(emails);
+        return emails;
+    }
+    public List<Email> allEmails() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM emailsInbox", null);
+        List<Email> emails = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String sender = cursor.getString(cursor.getColumnIndex("sender"));
+                @SuppressLint("Range") String mailContent = cursor.getString(cursor.getColumnIndex("emailsContent"));
+                @SuppressLint("Range") String subject = cursor.getString(cursor.getColumnIndex("Subject"));
+                @SuppressLint("Range") String timeStamp = cursor.getString(cursor.getColumnIndex("TimeStamp"));
+                @SuppressLint("Range") String receiver = cursor.getString(cursor.getColumnIndex("Receiver"));
+
+                Email email = new Email(sender, mailContent, subject, timeStamp, receiver);
                 emails.add(email);
             } while (cursor.moveToNext());
         }

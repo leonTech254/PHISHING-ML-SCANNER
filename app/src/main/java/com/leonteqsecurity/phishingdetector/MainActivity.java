@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.blacklisted:
-                        replaceFragemnet(new FragmentBlockedMails());
+                        replaceFragemnet(new FragmentBockedUsers());
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.blockedmails:
-                        replaceFragemnet(new FragmentBockedUsers());
+                        replaceFragemnet(new FragmentBlockedMails());
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.sentmail:

@@ -31,7 +31,8 @@ import java.util.Random;
 public class ComposeEmail extends AppCompatActivity {
     public static String filePath;
     TextView fromEmail;
-    public String URL="https://api2.leonteqsecurity.com/api/mail";
+    public String URL="http://192.168.43.73:5001/api/send/mail";
+//    http://192.168.43.73:5001/api/fetch/mail
     DbHelper db;
 
     @Override
@@ -110,6 +111,7 @@ public class ComposeEmail extends AppCompatActivity {
             requestBody.put("mail",mail);
             requestBody.put("subject",subject);
             requestBody.put("receiver",receiver);
+            requestBody.put("from",from);
         }catch (JSONException e)
         {
             e.printStackTrace();
@@ -141,7 +143,7 @@ public class ComposeEmail extends AppCompatActivity {
 //  adding the mail to the database
         db=new DbHelper(this);
         String currentTime=CurrentTime();
-        boolean dbResponse=db.putEmails(mail,from,"yes","no",currentTime,"no");
+        boolean dbResponse=db.putEmails(mail,subject,from,receiver,"yes","no",currentTime,"no");
         if (dbResponse)
         {
             Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();

@@ -42,6 +42,8 @@ public class CreateAccount extends AppCompatActivity {
             if (response)
             {
                 Toast.makeText(this, "Successfull registerd", Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent(this,LogInPage.class);
+                startActivity(intent);
 
             }else
             {
@@ -50,8 +52,7 @@ public class CreateAccount extends AppCompatActivity {
         }
 
 
-        Intent intent =new Intent();
-        startActivity(intent);
+
 
     }
 
